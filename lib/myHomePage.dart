@@ -28,10 +28,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: bodyElements,
-      ),
+      body: ListView(padding: EdgeInsets.all(16), children: bodyElements
+          //  [
+          //   WidgetToImage(
+          //       builder: (key) {
+          //         this._globalKey = key;
+          //         return ContentWidget();
+          //       },
+          //       key: GlobalKey()),
+          //   buildImage(_bytes)
+          // ]
+          ),
       bottomSheet: Container(
         color: Theme.of(context).accentColor,
         padding: EdgeInsets.all(16),
@@ -42,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.white,
             child: Text('Capture'),
             onPressed: () async {
-              final bytes1 = await Utils.capture(this._globalKey);
+              final bytes1 = await Utils.capture(_globalKey);
               setState(() {
                 this._bytes = bytes1;
                 addBodyElement();
