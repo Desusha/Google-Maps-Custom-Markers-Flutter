@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyPainter extends CustomPainter {
+  MyPainter(String lable);
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();

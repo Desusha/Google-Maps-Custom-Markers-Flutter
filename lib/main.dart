@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_to_image/widget/my_painter.dart';
 
@@ -27,6 +29,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<Uint8List> _myPaintToBitmap(String lable) async {
+    ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(recorder);
+    MyPainter myPainter = MyPainter(lable);
+
+    myPainter.paint(canvas, Size(300, 70));
+
+    final ui.Image image = await recorder.endRecording().toImage(300, 70);
+
+    final ByteData? byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
+
+    return byteData!.buffer.asUint8List();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
